@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  ksqldb-server:
+    image: confluentinc/cp-ksqldb-server:latest
+    container_name: ksqldb-server
+    ports:
+      - "8088:8088"
+
+  ksqldb-ui:
+    image: deniskrumko/ksqldb-ui:latest
+    container_name: ksqldb-ui
+    ports:
+      - "8188:8080"   # Access the UI on host port 8188
+    environment:
+      KSQLDB_UI__SERVERS__DEFAULT__URL: "http://10.88.233.79:8088"
+
