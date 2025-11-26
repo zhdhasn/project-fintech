@@ -1,0 +1,10 @@
+ssh-keygen -p -m PEM -f ~/.ssh/id_rsa
+cat id_rsa
+
+copy:
+-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----
+
+Add it in Jenkins credentials
+
