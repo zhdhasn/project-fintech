@@ -1,17 +1,19 @@
-version: '3.7'
-
 services:
-  ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:latest
-    container_name: ksqldb-server
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.25
+    container_name: kibana
+    restart: always
     ports:
-      - "8088:8088"
-
-  ksqldb-ui:
-    image: deniskrumko/ksqldb-ui:latest
-    container_name: ksqldb-ui
-    ports:
-      - "8988:8080"   # Access the UI on host port 8188
+      - "5601:5601"
     environment:
-      KSQLDB_UI__SERVERS__DEFAULT__URL: "http://10.88.233.79:8088"
+      - ELASTICSEARCH_HOSTS=["http://10.88.250.65:9200","http://10.88.250.66:9200","http://10.88.250.67:9200","http://10.88.250.68:9200","http://10.88.250.70:9200"]
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=Ksl@123
+      - XPACK_SECURITY_ENABLED=true
+    networks:
+      - elastic-network
 
+networks:
+  elastic-network:
+    driver: bridge
+~
